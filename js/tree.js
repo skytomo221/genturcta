@@ -69,6 +69,15 @@ function simplifyArrayOfTrees(parse) {
     return result;
 }
 
+function simplifyFunction(type) {
+    return function(parse) {
+        return {
+            type: type,
+            children: simplifyArrayOfTrees(parse.slice(1))
+        }
+    }
+}
+
 // The simplification functions
 
 var simplifyFunctions = {};
@@ -89,13 +98,16 @@ simplifyFunctions["free"] = function(parse) {
     }
 }
 
-simplifyFunctions["statement"] = function(parse) {
-    
-    return {
-        type: "言明（statement）",
-        children: simplifyArrayOfTrees(parse.slice(1))
-    }
-}
+
+simplifyFunctions["paragraphs"] = simplifyFunction("段落コレクション（paragraphs）");
+simplifyFunctions["paragraphs_1"] = simplifyFunction("段落コレクション第一下位（paragraphs-1）");
+simplifyFunctions["paragraphs_2"] = simplifyFunction("段落コレクション第二下位（paragraphs-2）");
+simplifyFunctions["paragraph"] = simplifyFunction("段落（paragraph）");
+simplifyFunctions["statement_terms"] = simplifyFunction("段落-項コレクション（paragraph-terms）");
+simplifyFunctions["statement"] = simplifyFunction("言明（statement）");
+simplifyFunctions["statement_1"] = simplifyFunction("言明第一下位（statement-1）");
+simplifyFunctions["statement_2"] = simplifyFunction("言明第二下位（statement-2）");
+simplifyFunctions["statement_3"] = simplifyFunction("言明第三下位（statement-3）");
 
 simplifyFunctions["sentence"] = function(parse) {
     
@@ -118,15 +130,6 @@ simplifyFunctions["bridi_tail"] = function(parse) {
     return {
         type: "ブリディ末端（bridi tail）",
         children: simplifyArrayOfTrees(parse.slice(1))
-    }
-}
-
-function simplifyFunction(type) {
-    return function(parse) {
-        return {
-            type: type,
-            children: simplifyArrayOfTrees(parse.slice(1))
-        }
     }
 }
 
