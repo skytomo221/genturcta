@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Lojban parser</title>
+  <link type="text/css" href="layout.css" rel="stylesheet">
+  <link href="bootstrap.css" rel="stylesheet">
+  <script src="jquery.js"></script><style type="text/css"></style>
+  <script src="remove_morphology.js"></script>
+  <script src="interface.js"></script>
+  <script src="tree.js"></script>
+  <script src="gismudata.js"></script>
+  <script src="camxes-beta.js"></script>
+  <script src="zantufa-1.3.js"></script>
+  <script src="transcriber.js"></script>
+  <script src="translationselbridata.js"></script>
+  <script src="bootstrap.js"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="row">
+    <div class="span12">
+     <h3>ロジバン構文解析器</h3>
+     このパーサは <a href="https://mw.lojban.org/papri/la_ilmentufa">Ilmen の camxes-beta.js エンジン</a> を使用しています。また、フロントエンドは la .uilym. によって作られました。
+    </div>
+   </div>
+   <div class="row">
+    <div class="span12">
+     <form onsubmit="parse(); return false;">
+      <fieldset>
+       <!--legend>Type any Lojban text in the following textarea and press "Parse".</legend-->
+       <textarea id="lojban-text-area" rows="5" placeholder='次のテキストエリアにロジバンのテキストを入力し、「構文解析」を押します。' style="width: 100%;"></textarea>
+       <button class="btn btn-primary" onclick="parse(); return false;"><i class="icon-search icon-white"></i> 構文解析</button>
+       <a href="glosser.htm#output-options-modal" class="btn" data-toggle="modal"><i class="icon-wrench"></i> 出力オプション</a>
+        <div id="output-options-modal" class="modal hide fade" tabindex="-1" role="dialog">
+        <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+         <h3>出力オプション</h3>
+        </div>
+        <div class="modal-body">
+         <p>The following options influence the way the parse output is shown.</p>
+         <legend>Mode</legend>
+         In which Lojban mode do you want to see the output?
+         <div class="btn-toolbar">
+          <div class="btn-group">
+           <a class="btn highlight-button active" id="latin-button" onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#latin-button&#39;).addClass(&#39;active&#39;);">Latin</a>
+           <a class="btn highlight-button" id="cyrillic-button" onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#cyrillic-button&#39;).addClass(&#39;active&#39;);">Cyrillic</a>
+           <a class="btn highlight-button" id="tengwar-button" onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#tengwar-button&#39;).addClass(&#39;active&#39;);">Tengwar</a>
+           <a class="btn highlight-button" id="hiragana-button" onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#hiragana-button&#39;).addClass(&#39;active&#39;);">Hiragana</a>
+          </div>
+         </div>
+         <legend>Periods</legend>
+         Which rule should be applied for adding periods to words? <b>(Not working yet...)</b>
+         <div class="btn-toolbar">
+          <div class="btn-group">
+           <a class="btn dots-button" id="nodots-button" onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#nodots-button&#39;).addClass(&#39;active&#39;);">None</a>
+           <a class="btn dots-button active" id="traditionaldots-button" onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#traditionaldots-button&#39;).addClass(&#39;active&#39;);">Traditional</a>
+           <a class="btn dots-button" id="dotside-button" onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#dotside-button&#39;).addClass(&#39;active&#39;);">Dotside</a>
+          </div>
+         </div>
+        </div>
+        <div class="modal-footer">
+         <a href="glosser.htm#" data-dismiss="modal" class="btn btn-primary"><i class="icon icon-ok icon-white"></i> 保存して閉じる</a>
+        </div>
+        </div>
+      </fieldset></form></div>
+     
+    
+   </div>
+   <div class="row">
+    <div id="result-row" class="span12" style="display: none;">
+     <legend>解析結果 <small><span id="time-label"></span></small></legend>
+     <ul class="nav nav-tabs">
+      <li class="active"><a id="parser-camxes-beta-tab" href="glosser.htm#parser-camxes-beta" data-toggle="tab">camxes-beta</a></li>
+      <li><a id="parser-zantufa-tab" href="glosser.htm#parser-zantufa" data-toggle="tab">zantufa 1.3</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="parser-camxes-beta" class="tab-pane active in fade"><i>解析をしています…</i></div>
+      <div id="parser-zantufa" class="tab-pane fade"><i>解析をしています…</i></div>
+     </div>
+    </div>
+   </div>
+  </div>
+ 
+</body></html>
