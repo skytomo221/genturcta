@@ -221,3 +221,20 @@ li.implicit {
 .vlasisku-link {
     color: maroon;
 }
+
+.unvoiced-sound {
+    position: relative;
+    padding-top: 0.2em;
+}
+     
+.unvoiced-sound::after {
+    position: absolute;
+    content: "";
+    width: 0.15em;
+    height: 0.15em;
+    border-radius: 50%;
+    border: solid 1px maroon;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
