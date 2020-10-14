@@ -313,9 +313,6 @@ function numberSumti(parse) {
     return parse;
 }
 
-// TODO This is not working correctly for [GIhA] bridi-tail connections.
-// We should reset the sumtiCounter to the value it had before entering the bridi-tail,
-// when we encounter a [GIhA].
 function numberSumtiInSentence(parse) {
 
     // first, for convenience, merge the bridi head and tail together in one array
