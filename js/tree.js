@@ -314,9 +314,6 @@ function numberSumti(parse) {
 }
 
 function numberSumtiInSentence(parse) {
-
-    // first, for convenience, merge the bridi head and tail together in one array
-    var sentenceElements = [];
     var baseCounter = 1;
 
     for (var i = 0; i < parse.children.length; i++) {
@@ -325,8 +322,7 @@ function numberSumtiInSentence(parse) {
         if (child.type === "ブリディ末端（bridi tail）") {
             for (var j = 0; j < child.children.length; j++) {
                 var subchild = child.children[j];
-                forBridiTail(subchild, baseCounter);
-                //sentenceElements.push(subchild);
+                bridiTailRecursion(subchild, baseCounter);
             }
         } else {
             baseCounter = toPlace(child, baseCounter);
@@ -334,17 +330,14 @@ function numberSumtiInSentence(parse) {
     }
 }
 
-function forBridiTail(child, baseCounter) {
+function bridiTailRecursion(child, baseCounter) {
     sumtiCounter = baseCounter;
     for (var j = 0; j < child.children.length; j++) {
         var subchild = child.children[j];
-        console.log(subchild);
         if (/FA|BAI|FIhO|PU|スムティ（sumti）|セルブリ（selbri）/g.test(subchild.type)) {
-            console.log("OK!" + subchild.type);
             sumtiCounter = toPlace(subchild, sumtiCounter);
-            console.log(subchild);
         } else if (/ブリディ末端/.test(subchild.type)) {
-            forBridiTail(subchild, baseCounter);
+            bridiTailRecursion(subchild, baseCounter);
         }
     }
 }
