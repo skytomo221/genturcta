@@ -101,3 +101,10 @@ genturcta は様々なロジバンパーサの解析結果を可視化して、�
 
 作者：
 [la .guskant.](https://github.com/guskant)
+
+### [skaitomon-zei-jbovlaste](https://github.com/skytomo221/skaitomon-zei-jbovlaste)
+
+作者：
+[skytomo (la .skaitomon.)](https://github.com/skytomo221)
+
+ギスムのデータをこの辞書から取得しています。
