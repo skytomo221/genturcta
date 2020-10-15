@@ -8,7 +8,16 @@
   <script src="js/interface.js"></script>
   <script src="js/tree.js"></script>
   <script src="js/gismudata.js"></script>
+  <script src="parser/camxes-beta-cbm-ckt.js"></script>
+  <script src="parser/camxes-beta-cbm.js"></script>
   <script src="parser/camxes-beta.js"></script>
+  <script src="parser/camxes-exp.js"></script>
+  <script src="parser/camxes.js"></script>
+  <script src="parser/maftufa-1.15.js"></script>
+  <script src="parser/maltufa-0.9.js"></script>
+  <script src="parser/maltufa-1.15.js"></script>
+  <script src="parser/zantufa-0.9.js"></script>
+  <script src="parser/zantufa-0.61.js"></script>
   <script src="parser/zantufa-1.3.js"></script>
   <script src="js/transcriber.js"></script>
   <script src="js/translationselbridata.js"></script>
@@ -69,12 +78,30 @@
     <div id="result-row" class="span12" style="display: none;">
      <legend>解析結果 <small><span id="time-label"></span></small></legend>
      <ul class="nav nav-tabs">
-      <li class="active"><a id="parser-camxes-beta-tab" href="glosser.htm#parser-camxes-beta" data-toggle="tab">camxes-beta</a></li>
-      <li><a id="parser-zantufa-tab" href="glosser.htm#parser-zantufa" data-toggle="tab">zantufa 1.3</a></li>
+      <li><a id="parser-camxes-beta-cbm-ckt-tab" href="glosser.htm#parser-camxes-beta-cbm-ckt" data-toggle="tab">Camxes: Beta CBM CKT</a></li>
+      <li><a id="parser-camxes-beta-cbm-tab" href="glosser.htm#parser-camxes-beta-cbm" data-toggle="tab">Camxes: Beta CBM</a></li>
+      <li class="active"><a id="parser-camxes-beta-tab" href="glosser.htm#parser-camxes-beta" data-toggle="tab">Camxes: Beta</a></li>
+      <li><a id="parser-camxes-exp-tab" href="glosser.htm#parser-camxes-exp" data-toggle="tab">Camxes: Experimental</a></li>
+      <li><a id="parser-camxes-tab" href="glosser.htm#parser-camxes" data-toggle="tab">Camxes: Standard</a></li>
+      <li><a id="parser-maftufa-1-15-tab" href="glosser.htm#parser-maftufa-1-15" data-toggle="tab">Maftufa 1.3</a></li>
+      <li><a id="parser-maltufa-0-9-tab" href="glosser.htm#parser-maltufa-0-9" data-toggle="tab">Maltufa 0.9</a></li>
+      <li><a id="parser-maltufa-1-15-tab" href="glosser.htm#parser-maltufa-1-15" data-toggle="tab">Maltufa 1.15</a></li>
+      <li><a id="parser-zantufa-0-9-tab" href="glosser.htm#parser-zantufa-0-9" data-toggle="tab">Zantufa 0.9</a></li>
+      <li><a id="parser-zantufa-0-61-tab" href="glosser.htm#parser-zantufa-0-61" data-toggle="tab">Zantufa 0.61</a></li>
+      <li><a id="parser-zantufa-1-3-tab" href="glosser.htm#parser-zantufa-1-3" data-toggle="tab">Zantufa 1.3</a></li>
     </ul>
     <div class="tab-content">
+      <div id="parser-camxes-beta-cbm-ckt" class="tab-pane in fade"><i>解析をしています…</i></div>
+      <div id="parser-camxes-beta-cbm" class="tab-pane in fade"><i>解析をしています…</i></div>
       <div id="parser-camxes-beta" class="tab-pane active in fade"><i>解析をしています…</i></div>
-      <div id="parser-zantufa" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-camxes-exp" class="tab-pane in fade"><i>解析をしています…</i></div>
+      <div id="parser-camxes" class="tab-pane in fade"><i>解析をしています…</i></div>
+      <div id="parser-maftufa-1-15" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-maltufa-0-9" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-maltufa-1-15" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-zantufa-0-9" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-zantufa-0-61" class="tab-pane fade"><i>解析をしています…</i></div>
+      <div id="parser-zantufa-1-3" class="tab-pane fade"><i>解析をしています…</i></div>
      </div>
     </div>
    </div>

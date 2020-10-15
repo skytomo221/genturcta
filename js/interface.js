@@ -9,51 +9,45 @@ $(document).ready(function() {
 function parse() {
     var textToParse = $("#lojban-text-area").val();
     $("#result-row").slideDown();
-        var start = new Date().getTime();
-    try {
-        var parse_camxes_beta = camxes_beta.parse(textToParse);
-        parse_camxes_beta = remove_morphology(parse_camxes_beta);
-        parse_camxes_beta = remove_spaces(parse_camxes_beta);
-        var simplified_camxes_beta = simplifyTree(parse_camxes_beta);
-        numberSumti(simplified_camxes_beta);
-        if (parse_camxes_beta) {
-            tokens = [];
-            findTokens(parse_camxes_beta, tokens);
-            var $parserCamxesBeta = $("#parser-camxes-beta");
-            showBoxes(simplified_camxes_beta, $parserCamxesBeta);
-        }
-        $("#parser-camxes-beta-tab").html("camxes-beta");
-    } catch (e) {
-        if (e.name && e.name === "SyntaxError") {
-            $("#parser-camxes-beta").html("<span class=\"muted\">Boxes</span>");
-            showSyntaxError(e, textToParse, $("#parser-camxes-beta"));
-        } else {
-            throw e;
-        }
-    }
-    try {
-        var parse_zantufa = zantufa_1_3.parse(textToParse);
-        parse_zantufa = remove_morphology(parse_zantufa);
-        parse_zantufa = remove_spaces(parse_zantufa);
-        var simplified_zantufa = simplifyTree(parse_zantufa);
-        numberSumti(simplified_zantufa);
-        if (parse_zantufa) {
-            tokens = [];
-            findTokens(parse_zantufa, tokens);
-            var $parserZantufa = $("#parser-zantufa");
-            showBoxes(simplified_zantufa, $parserZantufa);
-        }
-        $("#parser-zantufa-tab").html("zantufa 1.3");
-    } catch (e) {
-        if (e.name && e.name === "minajimpe") {
-            $("#parser-zantufa").html("<span class=\"muted\">Boxes</span>");
-            showSyntaxError(e, textToParse, $("#parser-zantufa"));
-        } else {
-            throw e;
-        }
-    }
+    var start = new Date().getTime();
+    subparse("Camxes: Beta CBM CKT", "#parser-camxes-beta-cbm-ckt", camxes_beta_cbm_ckt, textToParse);
+    subparse("Camxes: Beta CBM", "#parser-camxes-beta-cbm", camxes_beta_cbm, textToParse);
+    subparse("Camxes: Beta", "#parser-camxes-beta", camxes_beta, textToParse);
+    subparse("Camxes: Experimental", "#parser-camxes-exp", camxes_exp, textToParse);
+    subparse("Camxes: Standard", "#parser-camxes", camxes, textToParse);
+    subparse("Maftufa 1.15", "#parser-maftufa-1-15", maftufa_1_15, textToParse);
+    subparse("Maltufa 0.9", "#parser-maltufa-0-9", maltufa_0_9, textToParse);
+    subparse("Maltufa 1.15", "#parser-maltufa-1-15", maltufa_1_15, textToParse);
+    subparse("Zantufa 0.9", "#parser-zantufa-0-9", zantufa_0_9, textToParse);
+    subparse("Zantufa 0.61", "#parser-zantufa-0-61", zantufa_0_61, textToParse);
+    subparse("Zantufa 1.3", "#parser-zantufa-1-3", zantufa_1_3, textToParse);
     var end = new Date().getTime();
     $("#time-label").html("（処理時間: " + (end - start) + " ms)");        
+}
+
+function subparse(parserName, parserId, parserFunction, textToParse) {
+    parserTabId = parserId + "-tab";
+    try {
+        var parse = parserFunction.parse(textToParse)
+        parse = remove_morphology(parse);
+        parse = remove_spaces(parse);
+        var simplified = simplifyTree(parse);
+        numberSumti(simplified);
+        if (parse) {
+            tokens = [];
+            findTokens(parse, tokens);
+            var $parser = $(parserId);
+            showBoxes(simplified, $parser);
+        }
+        $(parserTabId).html(parserName);
+    } catch (e) {
+        if (e.name && (e.name === "SyntaxError" || e.name === "minajimpe")) {
+            $(parserId).html("<span class=\"muted\">Boxes</span>");
+            showSyntaxError(e, textToParse, $(parserId));
+        } else {
+            throw e;
+        }
+    }
 }
 
 /**
