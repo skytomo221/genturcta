@@ -4,7 +4,33 @@
 
 genturcta は様々なロジバンパーサの解析結果を可視化して、見比べることが簡単にできます。
 
+## 試してみよう
+
+パーサによって違う解析を出します。
+ときには、同じ文なのにエラーを出すパーサと出さないパーサがあることも。
+実際にどのように違うか以下の文で試してみよう
+
+1. coi ro do
+2. mi .io mlatu
+3. mi citka lo plise
+4. mi pu na citka lo plise
+5. broda .e brodi
+6. la .tokios.
+7. junla fi li su'i ja vu'u 20 noi se snidu
+8. ko na pencu lo nenri be lo tanxe be fi lo pelji
+9. mi dejni lo rupnu nagi'a dunda gi'abo lebna vau le cukta vau la djan.
+
 ## 使用したパーサ
+
+### camxes-beta-cbm-ckt.js
+
+作者：
+[Ilmen](https://github.com/Ilmen-vodhr)
+
+### camxes-beta-cbm.js
+
+作者：
+[Ilmen](https://github.com/Ilmen-vodhr)
 
 ### camxes.js
 
@@ -12,6 +38,11 @@ genturcta は様々なロジバンパーサの解析結果を可視化して、�
 [Masato Hagiwara](https://github.com/mhagiwara)
 
 ### camxes-beta.js
+
+作者：
+[Ilmen](https://github.com/Ilmen-vodhr)
+
+### camxes-exp.js
 
 作者：
 [Ilmen](https://github.com/Ilmen-vodhr)
@@ -70,3 +101,10 @@ genturcta は様々なロジバンパーサの解析結果を可視化して、�
 
 作者：
 [la .guskant.](https://github.com/guskant)
+
+### [skaitomon-zei-jbovlaste](https://github.com/skytomo221/skaitomon-zei-jbovlaste)
+
+作者：
+[skytomo (la .skaitomon.)](https://github.com/skytomo221)
+
+ギスムのデータをこの辞書から取得しています。
