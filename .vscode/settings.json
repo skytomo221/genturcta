@@ -1,0 +1,10 @@
+{
+    "eslint.options": {
+        "configFile": ".eslintrc.json"
+    },
+    "eslint.lintTask.options": "--config .eslintrc.json",
+    "jshint.enable": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}

@@ -37,7 +37,7 @@ function simplifyTree(parse) {
         }]
     }
 
-    var f = simplifyFunctions[parse[0]];
+    const f = simplifyFunctions[parse[0]];
 
     // if there is a simplification function, apply it
     if (f) {
@@ -45,7 +45,7 @@ function simplifyTree(parse) {
     }
 
     // else, we recursively search the children for things we do have a simplification function for
-    var result;
+    let result;
     if (isString(parse[0])) {
         result = simplifyArrayOfTrees(parse.slice(1));
     } else {
@@ -60,9 +60,9 @@ function simplifyTree(parse) {
  */
 function simplifyArrayOfTrees(parse) {
 
-    var result = [];
+    let result = [];
 
-    for (var i in parse) {
+    for (const i in parse) {
         result = result.concat(simplifyTree(parse[i]));
     }
 
@@ -72,7 +72,7 @@ function simplifyArrayOfTrees(parse) {
 function simplifyFunction(type) {
     return function (parse) {
         return {
-            type: type,
+            type,
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
@@ -82,98 +82,98 @@ function simplifyFunction(type) {
 
 var simplifyFunctions = {};
 
-simplifyFunctions["text"] = function (parse) {
+simplifyFunctions['text'] = function (parse) {
 
     return {
-        type: "文章（text）",
+        type: '文章（text）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["free"] = function (parse) {
+simplifyFunctions['free'] = function (parse) {
 
     return {
-        type: "自由修飾句（free modifier）",
+        type: '自由修飾句（free modifier）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
 
-simplifyFunctions["paragraphs"] = simplifyFunction("段落コレクション（paragraphs）");
-simplifyFunctions["paragraphs_1"] = simplifyFunction("段落コレクション第一下位（paragraphs-1）");
-simplifyFunctions["paragraphs_2"] = simplifyFunction("段落コレクション第二下位（paragraphs-2）");
-simplifyFunctions["paragraph"] = simplifyFunction("段落（paragraph）");
-simplifyFunctions["statement_terms"] = simplifyFunction("段落-項コレクション（paragraph-terms）");
-simplifyFunctions["statement"] = simplifyFunction("言明（statement）");
-simplifyFunctions["statement_1"] = simplifyFunction("言明第一下位（statement-1）");
-simplifyFunctions["statement_2"] = simplifyFunction("言明第二下位（statement-2）");
-simplifyFunctions["statement_3"] = simplifyFunction("言明第三下位（statement-3）");
+simplifyFunctions['paragraphs'] = simplifyFunction('段落コレクション（paragraphs）');
+simplifyFunctions['paragraphs_1'] = simplifyFunction('段落コレクション第一下位（paragraphs-1）');
+simplifyFunctions['paragraphs_2'] = simplifyFunction('段落コレクション第二下位（paragraphs-2）');
+simplifyFunctions['paragraph'] = simplifyFunction('段落（paragraph）');
+simplifyFunctions['statement_terms'] = simplifyFunction('段落-項コレクション（paragraph-terms）');
+simplifyFunctions['statement'] = simplifyFunction('言明（statement）');
+simplifyFunctions['statement_1'] = simplifyFunction('言明第一下位（statement-1）');
+simplifyFunctions['statement_2'] = simplifyFunction('言明第二下位（statement-2）');
+simplifyFunctions['statement_3'] = simplifyFunction('言明第三下位（statement-3）');
 
-simplifyFunctions["sentence"] = function (parse) {
+simplifyFunctions['sentence'] = function (parse) {
 
     return {
-        type: "文（sentence）",
+        type: '文（sentence）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["prenex"] = function (parse) {
+simplifyFunctions['prenex'] = function (parse) {
 
     return {
-        type: "prenex",
+        type: 'prenex',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["bridi_tail"] = function (parse) {
+simplifyFunctions['bridi_tail'] = function (parse) {
 
     return {
-        type: "ブリディ末端（bridi tail）",
+        type: 'ブリディ末端（bridi tail）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["bridi_tail_1"] = simplifyFunction("ブリディ末端第一下位（bridi-tail-1）");
-simplifyFunctions["bridi_tail_2"] = simplifyFunction("ブリディ末端第二下位（bridi-tail-2）");
-simplifyFunctions["bridi_tail_3"] = simplifyFunction("ブリディ末端第三下位（bridi-tail-3）");
+simplifyFunctions['bridi_tail_1'] = simplifyFunction('ブリディ末端第一下位（bridi-tail-1）');
+simplifyFunctions['bridi_tail_2'] = simplifyFunction('ブリディ末端第二下位（bridi-tail-2）');
+simplifyFunctions['bridi_tail_3'] = simplifyFunction('ブリディ末端第三下位（bridi-tail-3）');
 
-simplifyFunctions["selbri"] = function (parse) {
+simplifyFunctions['selbri'] = function (parse) {
 
     return {
-        type: "セルブリ（selbri）",
+        type: 'セルブリ（selbri）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["selbri_1"] = simplifyFunction("セルブリ第一下位（selbri-1）");
-simplifyFunctions["selbri_2"] = simplifyFunction("セルブリ第二下位（selbri-2）");
-simplifyFunctions["selbri_3"] = simplifyFunction("セルブリ第三下位（selbri-3）");
-simplifyFunctions["selbri_4"] = simplifyFunction("セルブリ第四下位（selbri-4）");
-simplifyFunctions["selbri_5"] = simplifyFunction("セルブリ第五下位（selbri-5）");
-simplifyFunctions["selbri_6"] = simplifyFunction("セルブリ第六下位（selbri-6）");
+simplifyFunctions['selbri_1'] = simplifyFunction('セルブリ第一下位（selbri-1）');
+simplifyFunctions['selbri_2'] = simplifyFunction('セルブリ第二下位（selbri-2）');
+simplifyFunctions['selbri_3'] = simplifyFunction('セルブリ第三下位（selbri-3）');
+simplifyFunctions['selbri_4'] = simplifyFunction('セルブリ第四下位（selbri-4）');
+simplifyFunctions['selbri_5'] = simplifyFunction('セルブリ第五下位（selbri-5）');
+simplifyFunctions['selbri_6'] = simplifyFunction('セルブリ第六下位（selbri-6）');
 
-simplifyFunctions["tanru_unit"] = function (parse) {
+simplifyFunctions['tanru_unit'] = function (parse) {
     return {
-        type: "タンル単位（tanru unit）",
+        type: 'タンル単位（tanru unit）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["sumti"] = function (parse) {
+simplifyFunctions['sumti'] = function (parse) {
 
     return {
-        type: "スムティ（sumti）",
+        type: 'スムティ（sumti）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["sumti_1"] = simplifyFunction("スムティ第一下位（sumti-1）");
-simplifyFunctions["sumti_2"] = simplifyFunction("スムティ第二下位（sumti-2）");
-simplifyFunctions["sumti_3"] = simplifyFunction("スムティ第三下位（sumti-3）");
-simplifyFunctions["sumti_4"] = simplifyFunction("スムティ第四下位（sumti-4）");
-simplifyFunctions["sumti_5"] = simplifyFunction("スムティ第五下位（sumti-5）");
+simplifyFunctions['sumti_1'] = simplifyFunction('スムティ第一下位（sumti-1）');
+simplifyFunctions['sumti_2'] = simplifyFunction('スムティ第二下位（sumti-2）');
+simplifyFunctions['sumti_3'] = simplifyFunction('スムティ第三下位（sumti-3）');
+simplifyFunctions['sumti_4'] = simplifyFunction('スムティ第四下位（sumti-4）');
+simplifyFunctions['sumti_5'] = simplifyFunction('スムティ第五下位（sumti-5）');
 
-simplifyFunctions["sumti_6"] = function (parse) {
+simplifyFunctions['sumti_6'] = function (parse) {
 
     // sumti-6 <- ZO-clause free* /
     //            ZOI-clause free* /
@@ -186,95 +186,95 @@ simplifyFunctions["sumti_6"] = function (parse) {
     //            (LA-clause / LE-clause) free* sumti-tail KU-clause? free* /
     //            li-clause
 
-    if (parse[1][0] === "ZO_clause") {
+    if (parse[1][0] === 'ZO_clause') {
         return {
-            type: "LOhU句（LOhU clause）<br>= 一語引用（one-word quote）",
+            type: 'LOhU句（LOhU clause）<br>= 一語引用（one-word quote）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "ZOI_clause") {
+    if (parse[1][0] === 'ZOI_clause') {
         return {
-            type: "ZOI句（ZOI clause）<br>= 非ロジバン引用（non-Lojban quote）",
+            type: 'ZOI句（ZOI clause）<br>= 非ロジバン引用（non-Lojban quote）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "LOhU_clause") {
+    if (parse[1][0] === 'LOhU_clause') {
         return {
-            type: "LOhU句（LOhU clause）<br>= エラー引用（ungrammatical quote）",
+            type: 'LOhU句（LOhU clause）<br>= エラー引用（ungrammatical quote）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "lerfu_string") {
+    if (parse[1][0] === 'lerfu_string') {
         return {
-            type: "字詞（letterals）",
+            type: '字詞（letterals）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "LU_clause") {
+    if (parse[1][0] === 'LU_clause') {
         return {
-            type: "LU句（LU clause）<br>= 引用（grammatical quote）",
+            type: 'LU句（LU clause）<br>= 引用（grammatical quote）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
     if (parse[1][0] instanceof Array) {
-        if (parse[1][0][0] === "LAhE_clause") {
+        if (parse[1][0][0] === 'LAhE_clause') {
             return {
-                type: "LAhE句（LAhE clause）<br>= 参照スムティ（reference sumti）",
+                type: 'LAhE句（LAhE clause）<br>= 参照スムティ（reference sumti）',
                 children: simplifyArrayOfTrees(parse.slice(1))
             }
         }
 
-        if (parse[1][0][0] === "NAhE_clause") {
+        if (parse[1][0][0] === 'NAhE_clause') {
             return {
-                type: "NAhE句（NAhE clause）<br>= 否定スムティ（negated sumti）",
+                type: 'NAhE句（NAhE clause）<br>= 否定スムティ（negated sumti）',
                 children: simplifyArrayOfTrees(parse.slice(1))
             }
         }
     }
 
-    if (parse[1][0] === "KOhA_clause") {
+    if (parse[1][0] === 'KOhA_clause') {
         return {
-            type: "KOhA句（KOhA clause）<br>= 代スムティ（sumka'i）",
+            type: 'KOhA句（KOhA clause）<br>= 代スムティ（sumka\'i）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "LA_clause") {
+    if (parse[1][0] === 'LA_clause') {
         return {
-            type: "LA句（LA clause）", // TODO how to disambiguate between those two?
+            type: 'LA句（LA clause）', // TODO how to disambiguate between those two?
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "LE_clause") {
+    if (parse[1][0] === 'LE_clause') {
         return {
-            type: "LE句（LE clause）<br>= 描写スムティ（description）",
+            type: 'LE句（LE clause）<br>= 描写スムティ（description）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
-    if (parse[1][0] === "li_clause") {
+    if (parse[1][0] === 'li_clause') {
         return {
-            type: "li句（li clause）<br>= 数（number）",
+            type: 'li句（li clause）<br>= 数（number）',
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     }
 
     return {
-        type: "unknown type sumti (bug?)",
+        type: 'unknown type sumti (bug?)',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
 
-simplifyFunctions["relative_clause"] = function (parse) {
+simplifyFunctions['relative_clause'] = function (parse) {
 
     return {
-        type: "関係節（relative clause）",
+        type: '関係節（relative clause）',
         children: simplifyArrayOfTrees(parse.slice(1))
     }
 }
@@ -299,12 +299,12 @@ function numberSumti(parse) {
     }
 
     // if it is a sentence, start searching through it
-    if (parse.type === "文（sentence）") {
+    if (parse.type === '文（sentence）') {
         numberSumtiInSentence(parse);
     }
 
     // and recursively search the children for things we can number as well
-    for (var i in parse) {
+    for (const i in parse) {
         if (!isString(parse[i])) {
             numberSumti(parse[i]);
         }
@@ -314,14 +314,14 @@ function numberSumti(parse) {
 }
 
 function numberSumtiInSentence(parse) {
-    var baseCounter = 1;
+    let baseCounter = 1;
 
-    for (var i = 0; i < parse.children.length; i++) {
-        var child = parse.children[i];
+    for (let i = 0; i < parse.children.length; i++) {
+        const child = parse.children[i];
 
-        if (child.type === "ブリディ末端（bridi tail）") {
-            for (var j = 0; j < child.children.length; j++) {
-                var subchild = child.children[j];
+        if (child.type === 'ブリディ末端（bridi tail）') {
+            for (let j = 0; j < child.children.length; j++) {
+                const subchild = child.children[j];
                 bridiTailRecursion(subchild, baseCounter);
             }
         } else {
@@ -332,8 +332,8 @@ function numberSumtiInSentence(parse) {
 
 function bridiTailRecursion(child, baseCounter) {
     sumtiCounter = baseCounter;
-    for (var j = 0; j < child.children.length; j++) {
-        var subchild = child.children[j];
+    for (let j = 0; j < child.children.length; j++) {
+        const subchild = child.children[j];
         if (/FA|BAI|FIhO|PU|スムティ（sumti）|セルブリ（selbri）/g.test(subchild.type)) {
             sumtiCounter = toPlace(subchild, sumtiCounter);
         } else if (/ブリディ末端/.test(subchild.type)) {
@@ -344,28 +344,28 @@ function bridiTailRecursion(child, baseCounter) {
 
 function toPlace(child, sumtiCounter) {
     // now walk through this array
-    var nextIsModal = false;
+    let nextIsModal = false;
 
-    if (child.type === "FA") {
+    if (child.type === 'FA') {
         sumtiCounter = placeTagToPlace(child);
     }
 
-    if (child.type === "BAI" || child.type === "FIhO" || child.type === "PU") {
+    if (child.type === 'BAI' || child.type === 'FIhO' || child.type === 'PU') {
         nextIsModal = true;
     }
 
-    if (child.type === "スムティ（sumti）") {
+    if (child.type === 'スムティ（sumti）') {
         if (nextIsModal) {
-            child.type = "法制スムティ（sumti modal）";
+            child.type = '法制スムティ（sumti modal）';
             nextIsModal = false;
         } else {
-            child.type = "第xスムティ（sumti x）";
+            child.type = '第xスムティ（sumti x）';
             child.sumtiPlace = sumtiCounter;
             sumtiCounter++;
         }
     }
 
-    if (child.type === "セルブリ（selbri）" && sumtiCounter === 1) {
+    if (child.type === 'セルブリ（selbri）' && sumtiCounter === 1) {
         sumtiCounter++;
     }
 
@@ -373,18 +373,18 @@ function toPlace(child, sumtiCounter) {
 }
 
 function placeTagToPlace(tag) {
-    if (tag.word === "fa") {
+    if (tag.word === 'fa') {
         return 1;
-    } else if (tag.word === "fe") {
+    } if (tag.word === 'fe') {
         return 2;
-    } else if (tag.word === "fi") {
+    } if (tag.word === 'fi') {
         return 3;
-    } else if (tag.word === "fo") {
+    } if (tag.word === 'fo') {
         return 4;
-    } else if (tag.word === "fu") {
+    } if (tag.word === 'fu') {
         return 5;
-    } else if (tag.word === "fai") {
-        return "fai";
+    } if (tag.word === 'fai') {
+        return 'fai';
         /* Ilmen: Yeah that's an ugly lazy handling of "fai", but a cleaner 
          * handling will require more work. */
     }
