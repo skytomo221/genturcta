@@ -39,9 +39,10 @@ function subparse(parserName, parserId, parserFunction, textToParse) {
             const $parser = $(parserId);
             showBoxes(simplified, $parser);
         }
-        $(parserTabId).html(parserName);
+        $(parserTabId).html(`${parserName} ✅`);
     } catch (e) {
         if (e.name && (e.name === 'SyntaxError' || e.name === 'minajimpe')) {
+            $(parserTabId).html(`${parserName} ❌`);
             $(parserId).html('<span class="muted">Boxes</span>');
             showSyntaxError(e, textToParse, $(parserId));
         } else {
