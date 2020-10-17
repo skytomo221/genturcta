@@ -13,6 +13,7 @@
     },
     "rules": {
         "dot-notation": "off",
+        "no-continue":"off",
         "no-undef": "off",
         "no-unused-vars": "off",
         "no-use-before-define": "off",
