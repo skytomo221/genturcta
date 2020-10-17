@@ -1,25 +1,25 @@
 // General functions
 
 function addDotsToWord(word, previous) {
-    
+
     var preDot = "";
     var postDot = "";
-    
+
     // if word begins with a vowel: dot before
     if (isVowel(word.charAt(0))) {
         preDot = ".";
     }
-    
+
     // if word is a cmene: dot after
     if (!isVowel(word.charAt(word.length - 1))) {
         postDot = ".";
-        
+
         // and except for preceding selma'o DOI or LA, also a dot before
         if (!previous || (previous !== "doi" && previous !== "la")) { // TODO: check if there are more of these
             preDot = ".";
         }
     }
-    
+
     return preDot + word + postDot;
 }
 
@@ -29,13 +29,13 @@ function isVowel(c) {
 
 function arrayToString(array) {
     var result = "";
-    
+
     for (var i = 0; i < array.length - 1; i++) {
         result += array[i] + " ";
     }
-    
+
     result += array[array.length - 1];
-    
+
     return result;
 }
 
@@ -43,11 +43,11 @@ function arrayToString(array) {
 
 function transcribeToLatin(text) {
     var result = [];
-    
+
     for (var i in text) {
         result.push(addDotsToWord(text[i], text[i - 1]));
     }
-    
+
     return result;
 }
 
@@ -55,28 +55,28 @@ function transcribeToLatin(text) {
 
 function transcribeToCyrillic(text) {
     var result = [];
-    
+
     for (var i in text) {
         result.push(wordToCyrillic(addDotsToWord(text[i], text[i - 1])));
     }
-    
+
     return result;
 }
 
 function wordToCyrillic(word) {
-    
+
     var cyrillicWord = "";
-    
+
     for (var i = 0; i < word.length; i++) {
         var letter = word.charAt(i);
-        
+
         var cyrillicLetter = cyrillicTable[letter];
         if (!cyrillicLetter) {
             cyrillicLetter = letter;
         }
         cyrillicWord += cyrillicLetter;
     }
-    
+
     return cyrillicWord;
 }
 
@@ -109,28 +109,28 @@ cyrillicTable["y"] = "&#1098;";
 
 function transcribeToTengwar(text) {
     var result = [];
-    
+
     for (var i in text) {
         result.push(wordToTengwar(addDotsToWord(text[i], text[i - 1])));
     }
-    
+
     return result;
 }
 
 function wordToTengwar(word) {
-    
+
     var tengwarWord = "";
     var canUseTehta = false;
-    
+
     for (var i = 0; i < word.length; i++) {
         var letter = word.charAt(i);
-        
+
         if (letter === "'") {
             tengwarWord += "&#57389;" // halla
             canUseTehta = false;
             continue;
         }
-        
+
         if (letter === ".") {
             // It would have been enough to set canUseTehta to true to get ":" for ".i",
             // but Tengwar Unicode fonts do not have tehta placement rules for the "lowered pusta",
@@ -145,12 +145,12 @@ function wordToTengwar(word) {
                     continue;
                 }
             }
-            
+
             tengwarWord += ".";
             canUseTehta = false;
             continue;
         }
-        
+
         var tehta = tehtaTable[letter];
         if (tehta) {
             if (i < word.length - 1 && tehtaTable[word.charAt(i + 1)]) {
@@ -170,18 +170,18 @@ function wordToTengwar(word) {
                 canUseTehta = false;
                 continue;
             }
-        } 
-        
+        }
+
         var tengwa = tengwaTable[letter];
         if (tengwa) {
             tengwarWord += tengwa;
             canUseTehta = true;
             continue;
         }
-        
+
         tengwarWord += "?";
     }
-    
+
     return tengwarWord;
 }
 
@@ -223,11 +223,11 @@ tehtaTable["y"] = "&#57413;";
 
 function transcribeToHiragana(text) {
     var result = [];
-    
+
     for (var i in text) {
         result.push(wordToHiragana(addDotsToWord(text[i], text[i - 1])));
     }
-    
+
     return result;
 }
 
@@ -235,35 +235,35 @@ function wordToHiragana(word) {
 
     var hiraganaWord = "";
     var preHiraganaWord = word
-    .replace("ba", "バ").replace("bi", "ビ").replace("bu", "ブ").replace("be", "ベ").replace("bo", "ボ").replace("by", "バ")
-    .replace("ca", "シャ").replace("ci", "ビ").replace("cu", "ブ").replace("ce", "シェ").replace("co", "ショ").replace("cy", "シァ")
-    .replace("da", "ダ").replace("di", "ビ").replace("du", "ブ").replace("de", "デ").replace("do", "ド").replace("dy", "ダァ")
-    .replace("fa", "ファ").replace("fi", "ビ").replace("fu", "ブ").replace("fe", "フェ").replace("fo", "フォ").replace("fy", "ファ")
-    .replace("ga", "ガ").replace("gi", "ビ").replace("gu", "ブ").replace("ge", "ベ").replace("go", "ゴ").replace("gy", "ガァ")
-    .replace("ja", "ジャ").replace("ji", "ビ").replace("ju", "ブ").replace("je", "ベ").replace("jo", "ジョ").replace("jy", "ジァ")
-    .replace("ka", "カ").replace("ki", "キ").replace("ku", "ク").replace("ke", "ケ").replace("ko", "コ").replace("ky", "カァ")
-    .replace("la", "ラﾟ").replace("li", "リﾟ").replace("lu", "ルﾟ").replace("le", "レﾟ").replace("lo", "ロﾟ").replace("ly", "ラﾟァ")
-    .replace("ma", "マ").replace("mi", "ミ").replace("mu", "ム").replace("me", "メ").replace("mo", "モ").replace("my", "マァ")
-    .replace("na", "ナ").replace("ni", "ニ").replace("nu", "ヌ").replace("ne", "ネ").replace("no", "ノ").replace("ny", "ナァ")
-    .replace("pa", "パ").replace("pi", "ピ").replace("pu", "プ").replace("pe", "ペ").replace("po", "ポ").replace("py", "パァ")
-    .replace("ra", "ラ").replace("ri", "リ").replace("ru", "ル").replace("re", "レ").replace("ro", "ロ").replace("ry", "ラァ")
-    .replace("sa", "サ").replace("si", "シ").replace("su", "ス").replace("se", "セ").replace("so", "ソ").replace("sy", "サァ")
-    .replace("ta", "タ").replace("ti", "ティ").replace("tu", "トゥ").replace("te", "テ").replace("to", "ト").replace("ty", "タァ")
-    .replace("va", "ヴァ").replace("vi", "ヴィ").replace("vu", "ヴ").replace("ve", "ヴェ").replace("vo", "ヴォ").replace("vy", "ヴァ")
-    .replace("xa", "ハ").replace("xi", "ヒ").replace("xu", "フ").replace("xe", "ヘ").replace("xo", "ホ").replace("xy", "ハァ")
-    .replace("za", "ザ").replace("zi", "ジ").replace("zu", "ズ").replace("ze", "ゼ").replace("zo", "ゾ").replace("zy", "ザァ")
-    .replace("'a", "は").replace("'i", "ひ").replace("'u", "ふ").replace("'e", "へ").replace("'o", "ほ").replace("'y", "はァ")
-    .replace("ia", "ヤ").replace("ii", "イィ").replace("iu", "ユ").replace("ie", "イェ").replace("io", "ヨ").replace("iy", "イァ")
-    .replace("ua", "ワ").replace("ui", "ウィ").replace("uu", "ウゥ").replace("ue", "ウェ").replace("uo", "ウォ").replace("uy", "ウァ")
-    .replace("a", "ア").replace("i", "イ").replace("u", "ウ").replace("e", "エ").replace("o", "オ").replace("y", "ァ")
-    .replace("n", "ン");
+        .replace("ba", "バ").replace("bi", "ビ").replace("bu", "ブ").replace("be", "ベ").replace("bo", "ボ").replace("by", "バ")
+        .replace("ca", "シャ").replace("ci", "ビ").replace("cu", "ブ").replace("ce", "シェ").replace("co", "ショ").replace("cy", "シァ")
+        .replace("da", "ダ").replace("di", "ビ").replace("du", "ブ").replace("de", "デ").replace("do", "ド").replace("dy", "ダァ")
+        .replace("fa", "ファ").replace("fi", "ビ").replace("fu", "ブ").replace("fe", "フェ").replace("fo", "フォ").replace("fy", "ファ")
+        .replace("ga", "ガ").replace("gi", "ビ").replace("gu", "ブ").replace("ge", "ベ").replace("go", "ゴ").replace("gy", "ガァ")
+        .replace("ja", "ジャ").replace("ji", "ビ").replace("ju", "ブ").replace("je", "ベ").replace("jo", "ジョ").replace("jy", "ジァ")
+        .replace("ka", "カ").replace("ki", "キ").replace("ku", "ク").replace("ke", "ケ").replace("ko", "コ").replace("ky", "カァ")
+        .replace("la", "ラﾟ").replace("li", "リﾟ").replace("lu", "ルﾟ").replace("le", "レﾟ").replace("lo", "ロﾟ").replace("ly", "ラﾟァ")
+        .replace("ma", "マ").replace("mi", "ミ").replace("mu", "ム").replace("me", "メ").replace("mo", "モ").replace("my", "マァ")
+        .replace("na", "ナ").replace("ni", "ニ").replace("nu", "ヌ").replace("ne", "ネ").replace("no", "ノ").replace("ny", "ナァ")
+        .replace("pa", "パ").replace("pi", "ピ").replace("pu", "プ").replace("pe", "ペ").replace("po", "ポ").replace("py", "パァ")
+        .replace("ra", "ラ").replace("ri", "リ").replace("ru", "ル").replace("re", "レ").replace("ro", "ロ").replace("ry", "ラァ")
+        .replace("sa", "サ").replace("si", "シ").replace("su", "ス").replace("se", "セ").replace("so", "ソ").replace("sy", "サァ")
+        .replace("ta", "タ").replace("ti", "ティ").replace("tu", "トゥ").replace("te", "テ").replace("to", "ト").replace("ty", "タァ")
+        .replace("va", "ヴァ").replace("vi", "ヴィ").replace("vu", "ヴ").replace("ve", "ヴェ").replace("vo", "ヴォ").replace("vy", "ヴァ")
+        .replace("xa", "ハ").replace("xi", "ヒ").replace("xu", "フ").replace("xe", "ヘ").replace("xo", "ホ").replace("xy", "ハァ")
+        .replace("za", "ザ").replace("zi", "ジ").replace("zu", "ズ").replace("ze", "ゼ").replace("zo", "ゾ").replace("zy", "ザァ")
+        .replace("'a", "は").replace("'i", "ひ").replace("'u", "ふ").replace("'e", "へ").replace("'o", "ほ").replace("'y", "はァ")
+        .replace("ia", "ヤ").replace("ii", "イィ").replace("iu", "ユ").replace("ie", "イェ").replace("io", "ヨ").replace("iy", "イァ")
+        .replace("ua", "ワ").replace("ui", "ウィ").replace("uu", "ウゥ").replace("ue", "ウェ").replace("uo", "ウォ").replace("uy", "ウァ")
+        .replace("a", "ア").replace("i", "イ").replace("u", "ウ").replace("e", "エ").replace("o", "オ").replace("y", "ァ")
+        .replace("n", "ン");
 
     for (var i = 0; i < preHiraganaWord.length; i++) {
         var next = preHiraganaWord.charAt(i);
         var nextTwo = preHiraganaWord.substring(i, i + 2);
-        
+
         console.log(hiraganaTable["co"]);
-        
+
         if (hiraganaTable[nextTwo]) {
             hiraganaWord += hiraganaTable[nextTwo];
             i++;

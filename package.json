@@ -1,0 +1,34 @@
+{
+  "name": "genturcta",
+  "version": "1.1.0",
+  "description": "Lojban parser visualizer",
+  "main": "index.js",
+  "dependencies": {
+    "jshint": "^2.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "^2.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skytomo221/genturcta.git"
+  },
+  "keywords": [
+    "lojban",
+    "parser",
+    "visualizer"
+  ],
+  "author": "skytomo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skytomo221/genturcta/issues"
+  },
+  "homepage": "https://github.com/skytomo221/genturcta#readme"
+}

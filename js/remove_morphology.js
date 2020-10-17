@@ -4,7 +4,7 @@ if (IS_NODEJS_ENV()) {
     module.exports = remove_morphology;
 
     /* Just for testing the program from the terminal. */
-    var test_input = ["text",["text_part_2",[["free",["vocative",[["COI_clause",["COI_pre",["COI",[["c","c"],["o","o"],["i","i"]]],["spaces",["initial_spaces"]]]]]],["sumti",["sumti_1",["sumti_2",["sumti_3",["sumti_4",["sumti_5",["quantifier",["number",["PA_clause",["PA_pre",["PA",[["r","r"],["o","o"]]],["spaces",["initial_spaces"]]]]],["BOI"]],["sumti_6",["KOhA_clause",["KOhA_pre",["KOhA",[["d","d"],["o","o"]]]]]]]]]]]],["DOhU"]]]]];
+    var test_input = ["text", ["text_part_2", [["free", ["vocative", [["COI_clause", ["COI_pre", ["COI", [["c", "c"], ["o", "o"], ["i", "i"]]], ["spaces", ["initial_spaces"]]]]]], ["sumti", ["sumti_1", ["sumti_2", ["sumti_3", ["sumti_4", ["sumti_5", ["quantifier", ["number", ["PA_clause", ["PA_pre", ["PA", [["r", "r"], ["o", "o"]]], ["spaces", ["initial_spaces"]]]]], ["BOI"]], ["sumti_6", ["KOhA_clause", ["KOhA_pre", ["KOhA", [["d", "d"], ["o", "o"]]]]]]]]]]]], ["DOhU"]]]]];
 
     console.log(JSON.stringify(remove_morphology(test_input)));
     process.exit();
@@ -82,7 +82,7 @@ function join_expr(n) {
 /* Checks whether the argument node is a target for pruning. */
 function is_target_node(n) {
     return (among(n[0], ["cmevla", "gismu", "lujvo", "fuhivla", "initial_spaces"])
-            || is_selmaho(n[0]));
+        || is_selmaho(n[0]));
 }
 
 function among(v, s) {
