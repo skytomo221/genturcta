@@ -110,8 +110,8 @@ function constructBoxesOutput(parseResult, depth) {
         // we have a terminal
         output += `&nbsp;<b>${getVlasiskuLink(parseResult.word)}</b>&nbsp;`;
         output += `&nbsp;${parseResult.type}&nbsp;`;
-        if (shortDescriptions[parseResult.word]) {
-            output += `<span class="translation">&nbsp;${shortDescriptions[parseResult.word]}&nbsp;</span>`;
+        if (grosses[parseResult.word]) {
+            output += `<span class="translation">&nbsp;${grosses[parseResult.word]}&nbsp;</span>`;
         } else {
             output += '不明';
         }
