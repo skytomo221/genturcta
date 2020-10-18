@@ -87,7 +87,7 @@ function showBoxes(simplified, $element) {
 function constructBoxesOutput(parseResult, depth) {
 
     // precaution against infinite recursion; this should not actually happen of course
-    if (depth > 50) {
+    if (depth > 3000) {
         return '<b>too much recursion :-(</b>';
     }
 
