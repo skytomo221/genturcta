@@ -17,17 +17,18 @@ genturcta は様々なロジバンパーサの解析結果を可視化して、�
 5. micitka galoplise gilobadna
 6. broda .ebrodi
 7. la .tokios.
-8. li 123
-9. dofeprami
+8. dofeprami
+9. li 123
 10. ni'oni'o
 11. .i .i .i
 12. ni'o .ini'o
-13. junla filisu'ijavu'u 20 noisesnidu
-14. junla filisu'ijavu'urenonoisesnidu
-15. doca'uviri'uvumo'iti'avabajra
-16. rodapoike'agerku zo'udadanlu
-17. konapencu lonenri belotanxe befilopelji
-18. midejni lorupnu nagi'adunda gi'abolebna vaulecukta vaula .djan.
+13. la .arjen. eru'uri
+14. junla filisu'ijavu'u 20 noisesnidu
+15. junla filisu'ijavu'urenonoisesnidu
+16. doca'uviri'uvumo'iti'avabajra
+17. rodapoike'agerku zo'udadanlu
+18. konapencu lonenri belotanxe befilopelji
+19. midejni lorupnu nagi'adunda gi'abolebna vaulecukta vaula .djan.
 
 ## 使用したパーサ
 

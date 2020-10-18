@@ -60,13 +60,13 @@
                 <div class="btn-toolbar">
                   <div class="btn-group">
                     <a class="btn highlight-button active" id="latin-button"
-                      onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#latin-button&#39;).addClass(&#39;active&#39;);">ラテン文字</a>
+                      onclick="$('.highlight-button').removeClass('active'); $('#latin-button').addClass('active');">ラテン文字</a>
                     <a class="btn highlight-button" id="cyrillic-button"
-                      onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#cyrillic-button&#39;).addClass(&#39;active&#39;);">キリル文字</a>
+                      onclick="$('.highlight-button').removeClass('active'); $('#cyrillic-button').addClass('active');">キリル文字</a>
                     <a class="btn highlight-button" id="tengwar-button"
-                      onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#tengwar-button&#39;).addClass(&#39;active&#39;);">テングワール</a>
+                      onclick="$('.highlight-button').removeClass('active'); $('#tengwar-button').addClass('active');">テングワール</a>
                     <a class="btn highlight-button" id="hiragana-button"
-                      onclick="$(&#39;.highlight-button&#39;).removeClass(&#39;active&#39;); $(&#39;#hiragana-button&#39;).addClass(&#39;active&#39;);">ひらがな</a>
+                      onclick="$('.highlight-button').removeClass('active'); $('#hiragana-button').addClass('active');">ひらがな</a>
                   </div>
                 </div>
                 <legend>ピリオド</legend>
@@ -74,11 +74,11 @@
                 <div class="btn-toolbar">
                   <div class="btn-group">
                     <a class="btn dots-button" id="nodots-button"
-                      onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#nodots-button&#39;).addClass(&#39;active&#39;);">なし</a>
+                      onclick="$('.dots-button').removeClass('active'); $('#nodots-button').addClass('active');">なし</a>
                     <a class="btn dots-button active" id="traditionaldots-button"
-                      onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#traditionaldots-button&#39;).addClass(&#39;active&#39;);">標準</a>
+                      onclick="$('.dots-button').removeClass('active'); $('#traditionaldots-button').addClass('active');">標準</a>
                     <a class="btn dots-button" id="dotside-button"
-                      onclick="$(&#39;.dots-button&#39;).removeClass(&#39;active&#39;); $(&#39;#dotside-button&#39;).addClass(&#39;active&#39;);">両端に必ずピリオドをつける</a>
+                      onclick="$('.dots-button').removeClass('active'); $('#dotside-button').addClass('active');">両端に必ずピリオドをつける</a>
                   </div>
                 </div>
               </div>
@@ -120,17 +120,28 @@
           </li>
         </ul>
         <div class="tab-content">
-          <div id="parser-camxes-beta-cbm-ckt" class="tab-pane in fade"><i>解析をしています…</i></div>
-          <div id="parser-camxes-beta-cbm" class="tab-pane in fade"><i>解析をしています…</i></div>
-          <div id="parser-camxes-beta" class="tab-pane active in fade"><i>解析をしています…</i></div>
-          <div id="parser-camxes-exp" class="tab-pane in fade"><i>解析をしています…</i></div>
-          <div id="parser-camxes" class="tab-pane in fade"><i>解析をしています…</i></div>
-          <div id="parser-maftufa-1-15" class="tab-pane fade"><i>解析をしています…</i></div>
-          <div id="parser-maltufa-0-9" class="tab-pane fade"><i>解析をしています…</i></div>
-          <div id="parser-maltufa-1-15" class="tab-pane fade"><i>解析をしています…</i></div>
-          <div id="parser-zantufa-0-9" class="tab-pane fade"><i>解析をしています…</i></div>
-          <div id="parser-zantufa-0-61" class="tab-pane fade"><i>解析をしています…</i></div>
-          <div id="parser-zantufa-1-3" class="tab-pane fade"><i>解析をしています…</i></div>
+          <div id="parser-camxes-beta-cbm-ckt" class="tab-pane in fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-camxes-beta-cbm" class="tab-pane in fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-camxes-beta" class="tab-pane active in fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-camxes-exp" class="tab-pane in fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-camxes" class="tab-pane in fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-maftufa-1-15" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-maltufa-0-9" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-maltufa-1-15" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-zantufa-0-9" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-zantufa-0-61" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
+          <div id="parser-zantufa-1-3" class="tab-pane fade"><i>これが見えているということはおそらくバグが発生していると思います。<br><a
+                href="https://github.com/skytomo221/genturcta/issues">Issue</a>を立てて、問題を報告してくださいませんか？</i></div>
         </div>
       </div>
     </div>

@@ -46,7 +46,9 @@ function subparse(parserName, parserId, parserFunction, textToParse) {
             $(parserId).html('<span class="muted">Boxes</span>');
             showSyntaxError(e, textToParse, $(parserId));
         } else {
-            throw e;
+            $(parserTabId).html(`${parserName} 😈`);
+            // eslint-disable-next-line no-console
+            console.error(e);
         }
     }
 }
