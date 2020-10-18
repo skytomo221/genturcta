@@ -124,7 +124,7 @@ function constructBoxesOutput(parseResult, depth) {
 
         output += `<div class="${boxClassForType(parseResult)}">`;
 
-        if (!(/下位/.test(parseResult.type) && parseResult.children.length <= 1)) {
+        if (visiable(parseResult)) {
             output += '<div class="box box-type">';
             if (parseResult.sumtiPlace) {
                 output += `第${parseResult.sumtiPlace}スムティ（sumti x${parseResult.sumtiPlace}）`;
@@ -134,7 +134,7 @@ function constructBoxesOutput(parseResult, depth) {
                 output += '<div class="box box-undefined"></div>';
             }
             output += '</div>';
-        }
+        }        
 
         parseResult.children.forEach(child => {
             output += constructBoxesOutput(child, depth + 1);
@@ -178,15 +178,19 @@ function boxClassForType(parseResult) {
         return 'box box-selbri';
     }
 
-    if (parseResult.type === 'prenex') {
+    if (parseResult.type === '冠頭（prenex）') {
         return 'box box-prenex';
     }
 
-    if (/下位/.test(parseResult.type) && parseResult.children.length <= 1) {
+    if (!visiable(parseResult)) {
         return 'box box-not-shown';
     }
 
     return 'box box-thin';
+}
+
+function visiable(parseResult) {
+    return !(/（非表示）/.test(parseResult.type) || (/コレクション|下位/.test(parseResult.type) && parseResult.children.length <= 1));
 }
 
 /**
