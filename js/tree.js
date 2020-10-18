@@ -59,8 +59,14 @@ function simplifyTree(parse) {
  * Simplifies an array of trees.
  */
 function simplifyArrayOfTrees(parse) {
-
     let result = [];
+
+    if (isString(parse)) {
+        return [{
+            type: '?',
+            word: '?'
+        }]
+    }
 
     parse.forEach(element => {
         result = result.concat(simplifyTree(element));
@@ -110,7 +116,7 @@ const simplifyFunctions = {
     'bridi_tail': simplifyFunction('ブリディ末端（bridi tail）'),
     'bridi_tail_1': (parse) => {
         return {
-            type: `セルブリ末端第一下位（bridi tail 1）${((parse.length === 2 && parse[0][0] === 'bridi_tail_2' && parse[1][0] === 'bridi_tail_3') || (parse.length === 3 && parse[1][0] === 'bridi_tail_2' && parse[2][0] === 'bridi_tail_3')) ? '（非表示）' : ''}`,
+            type: `ブリディ末端第一下位（bridi tail 1）${((parse.length === 2 && parse[0][0] === 'bridi_tail_2' && parse[1][0] === 'bridi_tail_3') || (parse.length === 3 && parse[1][0] === 'bridi_tail_2' && parse[2][0] === 'bridi_tail_3')) ? '（非表示）' : ''}`,
             children: simplifyArrayOfTrees(parse.slice(1))
         }
     },
@@ -260,8 +266,8 @@ const simplifyFunctions = {
     'mex_forethought': simplifyFunction('数式おもんぱかり下位（mex forethought）'),
     'operator': simplifyFunctionUnconditionalShow('演算子（operator）'),
     'operand': simplifyFunctionUnconditionalShow('被演算子（operand）'),
-    'tense_modal': simplifyFunction('時空間制（tense modal）'),
-    'simple_tense_modal': simplifyFunction('単純時空間制（simple tense modal）'),
+    'tense_modal': simplifyFunction('制詞（tense modal）'),
+    'simple_tense_modal': simplifyFunction('単純制詞（simple tense modal）'),
     'time': simplifyFunction('時制（time）'),
     'space': simplifyFunction('空間制（space）'),
     'free': simplifyFunction('自由修飾句（free modifier）'),
@@ -311,57 +317,50 @@ function numberSumtiInSentence(parse) {
 
     for (let i = 0; i < parse.children.length; i += 1) {
         const child = parse.children[i];
-
-        if (child.type === 'ブリディ末端（bridi tail）') {
+        if (child.children) {
             for (let j = 0; j < child.children.length; j += 1) {
                 const subchild = child.children[j];
-                bridiTailRecursion(subchild, baseCounter);
+                baseCounter = bridiTailRecursion(subchild, baseCounter);
             }
-        } else {
-            baseCounter = toPlace(child, baseCounter);
         }
     }
 }
 
 function bridiTailRecursion(child, baseCounter) {
+    // now walk through this array
+    let nextIsModal = false;
     sumtiCounter = baseCounter;
     for (let j = 0; j < child.children.length; j += 1) {
         const subchild = child.children[j];
-        if (/FA|BAI|FIhO|PU|スムティ（sumti）|セルブリ（selbri）/g.test(subchild.type)) {
-            sumtiCounter = toPlace(subchild, sumtiCounter);
-        } else if (/ブリディ末端/.test(subchild.type)) {
+        if (/FA|制詞（tense modal）|BAI|FIhO|PU|スムティ（sumti）|セルブリ（selbri）/g.test(subchild.type)) {
+            if (subchild.type === 'FA') {
+                sumtiCounter = placeTagToPlace(subchild);
+            }
+        
+            if (subchild.type === '制詞（tense modal）' || subchild.type === 'BAI' || subchild.type === 'FIhO' || subchild.type === 'PU') {
+                nextIsModal = true;
+            }
+        
+            if (subchild.type === 'スムティ（sumti）') {
+                if (nextIsModal) {
+                    subchild.type = '法制スムティ（sumti modal）';
+                    nextIsModal = false;
+                } else {
+                    subchild.type = '第xスムティ（sumti x）';
+                    subchild.sumtiPlace = sumtiCounter;
+                    sumtiCounter += 1;
+                }
+            }
+        
+            if (subchild.type === 'セルブリ（selbri）' && sumtiCounter === 1) {
+                sumtiCounter += 1;
+            }
+        } else if (/ブリディ末端/g.test(subchild.type)) {
             bridiTailRecursion(subchild, baseCounter);
+        } else if (/ブリディ末端|項/.test(subchild.type)) {
+            sumtiCounter = bridiTailRecursion(subchild, sumtiCounter);
         }
     }
-}
-
-function toPlace(child, sumtiCounter) {
-    // now walk through this array
-    let nextIsModal = false;
-
-    if (child.type === 'FA') {
-        sumtiCounter = placeTagToPlace(child);
-    }
-
-    if (child.type === 'BAI' || child.type === 'FIhO' || child.type === 'PU') {
-        nextIsModal = true;
-    }
-
-    if (child.type === 'スムティ（sumti）') {
-        if (nextIsModal) {
-            child.type = '法制スムティ（sumti modal）';
-            nextIsModal = false;
-        } else {
-            child.type = '第xスムティ（sumti x）';
-            child.sumtiPlace = sumtiCounter;
-            sumtiCounter += 1;
-        }
-    }
-
-    if (child.type === 'セルブリ（selbri）' && sumtiCounter === 1) {
-        sumtiCounter += 1;
-    }
-
     return sumtiCounter;
 }
 
