@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(() => {
     $('label').popover();
 });
 
@@ -22,20 +22,20 @@ function parse() {
     subparse('Zantufa 0.61', '#parser-zantufa-0-61', zantufa_0_61, textToParse);
     subparse('Zantufa 1.3', '#parser-zantufa-1-3', zantufa_1_3, textToParse);
     const end = new Date().getTime();
-    $('#time-label').html(`（処理時間: ${  end - start  } ms)`);
+    $('#time-label').html(`（処理時間：${end - start}ミリ秒)`);
 }
 
 function subparse(parserName, parserId, parserFunction, textToParse) {
-    parserTabId = `${parserId  }-tab`;
+    parserTabId = `${parserId}-tab`;
     try {
-        let parse = parserFunction.parse(textToParse)
-        parse = remove_morphology(parse);
-        parse = remove_spaces(parse);
-        const simplified = simplifyTree(parse);
+        let parseResult = parserFunction.parse(textToParse)
+        parseResult = removeMorphology(parseResult);
+        parseResult = removeSpaces(parseResult);
+        const simplified = simplifyTree(parseResult);
         numberSumti(simplified);
-        if (parse) {
+        if (parseResult) {
             tokens = [];
-            findTokens(parse, tokens);
+            findTokens(parseResult, tokens);
             const $parser = $(parserId);
             showBoxes(simplified, $parser);
         }
@@ -54,15 +54,13 @@ function subparse(parserName, parserId, parserFunction, textToParse) {
 /**
  * Finds all tokens in the resulting parse tree, and puts them in the tokens array.
  */
-function findTokens(parse, tokens) {
+function findTokens(parseResult, tokens) {
 
-    if (parse instanceof Array) {
-        if (parse.length == 2 && isString(parse[0]) && isString(parse[1])) {
-            tokens.push(parse[1]);
+    if (parseResult instanceof Array) {
+        if (parseResult.length === 2 && isString(parseResult[0]) && isString(parseResult[1])) {
+            tokens.push(parseResult[1]);
         } else {
-            for (child in parse) {
-                findTokens(parse[child], tokens);
-            }
+            parseResult.forEach(child => findTokens(parseResult[child], tokens));
         }
     }
 }
@@ -86,34 +84,34 @@ function showBoxes(simplified, $element) {
     $element.html(output);
 }
 
-function constructBoxesOutput(parse, depth) {
+function constructBoxesOutput(parseResult, depth) {
 
     // precaution against infinite recursion; this should not actually happen of course
-    if (depth > 50) {
+    if (depth > 3000) {
         return '<b>too much recursion :-(</b>';
     }
 
     // if we get null, just print that
-    if (parse === null) {
+    if (parseResult === null) {
         return '<i>(none?)</i>';
     }
 
     // if we get undefined, just print that
-    if (!parse) {
+    if (!parseResult) {
         return '<i>(undefined?)</i>';
     }
 
     let output = '';
 
-    if (parse.word) {
+    if (parseResult.word) {
 
         output += '<div class="box box-terminal">';
 
         // we have a terminal
-        output += `&nbsp;<b>${  getVlasiskuLink(parse.word)  }</b>&nbsp;`;
-        output += `&nbsp;${  parse.type  }&nbsp;`;
-        if (shortDescriptions[parse.word]) {
-            output += `<span class="translation">&nbsp;${  shortDescriptions[parse.word]  }&nbsp;</span>`;
+        output += `&nbsp;<b>${getVlasiskuLink(parseResult.word)}</b>&nbsp;`;
+        output += `&nbsp;${parseResult.type}&nbsp;`;
+        if (grosses[parseResult.word]) {
+            output += `<span class="translation">&nbsp;${grosses[parseResult.word]}&nbsp;</span>`;
         } else {
             output += '不明';
         }
@@ -124,23 +122,23 @@ function constructBoxesOutput(parse, depth) {
 
         // we have a non-terminal
 
-        output += `<div class="${  boxClassForType(parse)  }">`;
+        output += `<div class="${boxClassForType(parseResult)}">`;
 
-        if (!(/下位/.test(parse.type) && parse.children.length <= 1)) {
+        if (visiable(parseResult)) {
             output += '<div class="box box-type">';
-            if (parse.sumtiPlace) {
-                output += `第${  parse.sumtiPlace  }スムティ（sumti x${  parse.sumtiPlace  }）`;
-            } else if (parse.type) {
-                output += parse.type;
+            if (parseResult.sumtiPlace) {
+                output += `第${parseResult.sumtiPlace}スムティ（sumti x${parseResult.sumtiPlace}）`;
+            } else if (parseResult.type) {
+                output += parseResult.type;
             } else {
                 output += '<div class="box box-undefined"></div>';
             }
             output += '</div>';
-        }
+        }        
 
-        for (const child in parse.children) {
-            output += constructBoxesOutput(parse.children[child], depth + 1);
-        }
+        parseResult.children.forEach(child => {
+            output += constructBoxesOutput(child, depth + 1);
+        })
 
         output += '</div>';
     }
@@ -148,47 +146,51 @@ function constructBoxesOutput(parse, depth) {
     return output;
 }
 
-function boxClassForType(parse) {
+function boxClassForType(parseResult) {
 
-    if (parse.type === '文章（text）') {
+    if (parseResult.type === '文章（text）') {
         return 'box box-text';
     }
 
-    if (parse.type === '文（sentence）') {
+    if (parseResult.type === '文（sentence）') {
         return 'box box-sentence';
     }
 
-    if (parse.type === '第xスムティ（sumti x）') {
-        if (parse.sumtiPlace > 5) {
+    if (parseResult.type === '第xスムティ（sumti x）') {
+        if (parseResult.sumtiPlace > 5) {
             return 'box box-sumti6';
-        } if (parse.sumtiPlace == 'fai') {
+        } if (parseResult.sumtiPlace === 'fai') {
             return 'box box-sumti-fai';
-        } 
-            return `box box-sumti${  parse.sumtiPlace}`;
-        
+        }
+        return `box box-sumti${parseResult.sumtiPlace}`;
+
     }
 
-    if (parse.type === '法制スムティ（sumti modal）') {
+    if (parseResult.type === '法制スムティ（sumti modal）') {
         return 'box box-modal';
     }
 
-    if (parse.type === 'スムティ（sumti）') {
+    if (parseResult.type === 'スムティ（sumti）') {
         return 'box box-sumti';
     }
 
-    if (parse.type === 'セルブリ（selbri）') {
+    if (parseResult.type === 'セルブリ（selbri）') {
         return 'box box-selbri';
     }
 
-    if (parse.type === 'prenex') {
+    if (parseResult.type === '冠頭（prenex）') {
         return 'box box-prenex';
     }
 
-    if (/下位/.test(parse.type) && parse.children.length <= 1) {
+    if (!visiable(parseResult)) {
         return 'box box-not-shown';
     }
 
     return 'box box-thin';
+}
+
+function visiable(parseResult) {
+    return !(/（非表示）/.test(parseResult.type) || (/コレクション|下位/.test(parseResult.type) && parseResult.children.length <= 1));
 }
 
 /**
@@ -197,17 +199,12 @@ function boxClassForType(parse) {
 function showSyntaxError(e, textToParse, $element) {
 
     const output = `${'<div class="alert">' +
-        '<p><b>Syntax error</b> on line <b>'}${ 
-        e.line 
-        }</b>, at column <b>${ 
-        e.column 
-        }</b>: ${ 
-        e.message 
+        '<p><b>Syntax error</b> on line <b>'}${e.line
+        }</b>, at column <b>${e.column
+        }</b>: ${e.message
         }</p>` +
-        `<p class="error-sentence">${ 
-        generateErrorPosition(e, textToParse) 
-        }</p>${ 
-        generateFixes(e) 
+        `<p class="error-sentence">${generateErrorPosition(e, textToParse)
+        }</p>${generateFixes(e)
         }</div>`;
 
     $element.html(output);
@@ -225,13 +222,13 @@ function generateErrorPosition(e, textToParse) {
     let after = textToParse.substring(e.offset + 0, e.offset + 20);
 
     if (e.offset > 20) {
-        before = `...${  before}`;
+        before = `...${before}`;
     }
     if (e.offset < textToParse.length - 20) {
         after += '...';
     }
 
-    return `${before  }<span class="error-marker">&#9652;</span>${  after}`;
+    return `${before}<span class="error-marker">&#9652;</span>${after}`;
 }
 
 function generateFixes(e) {
@@ -242,8 +239,7 @@ function generateFixes(e) {
 
     let fixes = '<p>Quick fixes:<ul>';
 
-    for (const f in e.fix) {
-        const fix = (e.fix)[f];
+    e.fix.forEach(fix => {
         fixes += '<li>';
 
         if (fix.fixFunction) {
@@ -255,7 +251,7 @@ function generateFixes(e) {
         }
 
         fixes += '</li>';
-    }
+    });
 
     fixes += '</ul></p>';
 
@@ -265,13 +261,13 @@ function generateFixes(e) {
 /**
  * Shows the translation in the interface.
  */
-function showTranslation(parse, text, $element) {
+function showTranslation(parseResult, text, $element) {
 
     let output = '<p class="muted">This translation feature tries to give an approximate translation of the Lojban text into English. However, it does only work for a few sentences as of now. (Try [mi gleki] or something simple like that...)</p>';
 
     // var translation = translate(parse);
     const translation = 'Sorry! Translation is switched off at the moment, to prevent crashes in the other parts :-(';
-    output += `<center><big>${  translation  }</big></center>`;
+    output += `<center><big>${translation}</big></center>`;
 
     $element.html(output);
 }
@@ -283,7 +279,7 @@ function isString(s) {
 }
 
 function getVlasiskuLink(word) {
-    return `<a class="vlasisku-link" href="http://vlasisku.lojban.org/vlasisku/${  word  }">${  outputWord(word, getSelectedMode())  }</a>`;
+    return `<a class="vlasisku-link" href="http://vlasisku.lojban.org/vlasisku/${word}">${outputWord(word, getSelectedMode())}</a>`;
 }
 
 function outputWord(word, mode) {
@@ -296,6 +292,7 @@ function outputWord(word, mode) {
     } if (mode === 4) { // Hiragana mode
         return wordToHiragana(addDotsToWord(word));
     }
+    return null;
 }
 
 function getSelectedMode() {
@@ -308,6 +305,7 @@ function getSelectedMode() {
     } if ($('#hiragana-button').hasClass('active')) {
         return 4;
     }
+    return null;
 }
 
 function endsWith(str, suffix) {

@@ -10,15 +10,24 @@ genturcta は様々なロジバンパーサの解析結果を可視化して、�
 ときには、同じ文なのにエラーを出すパーサと出さないパーサがあることも。
 実際にどのように違うか以下の文で試してみよう
 
-1. coi ro do
-2. mi .io mlatu
-3. mi citka lo plise
-4. mi pu na citka lo plise
-5. broda .e brodi
-6. la .tokios.
-7. junla fi li su'i ja vu'u 20 noi se snidu
-8. ko na pencu lo nenri be lo tanxe be fi lo pelji
-9. mi dejni lo rupnu nagi'a dunda gi'abo lebna vau le cukta vau la djan.
+1. coirodo
+2. mi .iomlatu
+3. micitka loplise
+4. mipunacitka loplise
+5. micitka galoplise gilobadna
+6. broda .ebrodi
+7. la .tokios.
+8. li 123
+9. dofeprami
+10. ni'oni'o
+11. .i .i .i
+12. ni'o .ini'o
+13. junla filisu'ijavu'u 20 noisesnidu
+14. junla filisu'ijavu'urenonoisesnidu
+15. doca'uviri'uvumo'iti'avabajra
+16. rodapoike'agerku zo'udadanlu
+17. konapencu lonenri belotanxe befilopelji
+18. midejni lorupnu nagi'adunda gi'abolebna vaulecukta vaula .djan.
 
 ## 使用したパーサ
 

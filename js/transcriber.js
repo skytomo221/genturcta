@@ -30,8 +30,8 @@ function isVowel(c) {
 function arrayToString(array) {
     let result = '';
 
-    for (let i = 0; i < array.length - 1; i++) {
-        result += `${array[i]  } `;
+    for (let i = 0; i < array.length - 1; i += 1) {
+        result += `${array[i]} `;
     }
 
     result += array[array.length - 1];
@@ -44,9 +44,9 @@ function arrayToString(array) {
 function transcribeToLatin(text) {
     const result = [];
 
-    for (const i in text) {
-        result.push(addDotsToWord(text[i], text[i - 1]));
-    }
+    text.forEach((_, index) => {
+        result.push(addDotsToWord(text[index], text[index - 1]));
+    });
 
     return result;
 }
@@ -56,9 +56,9 @@ function transcribeToLatin(text) {
 function transcribeToCyrillic(text) {
     const result = [];
 
-    for (const i in text) {
-        result.push(wordToCyrillic(addDotsToWord(text[i], text[i - 1])));
-    }
+    text.forEach((_, index) => {
+        result.push(wordToCyrillic(addDotsToWord(text[index], text[index - 1])));
+    });
 
     return result;
 }
@@ -67,7 +67,7 @@ function wordToCyrillic(word) {
 
     let cyrillicWord = '';
 
-    for (let i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length; i += 1) {
         const letter = word.charAt(i);
 
         let cyrillicLetter = cyrillicTable[letter];
@@ -80,39 +80,40 @@ function wordToCyrillic(word) {
     return cyrillicWord;
 }
 
-var cyrillicTable = {};
-cyrillicTable['b'] = '&#1073;';
-cyrillicTable['c'] = '&#1096;';
-cyrillicTable['d'] = '&#1076;';
-cyrillicTable['f'] = '&#1092;';
-cyrillicTable['g'] = '&#1075;';
-cyrillicTable['j'] = '&#1078;';
-cyrillicTable['k'] = '&#1082;';
-cyrillicTable['l'] = '&#1083;';
-cyrillicTable['m'] = '&#1084;';
-cyrillicTable['n'] = '&#1085;';
-cyrillicTable['p'] = '&#1087;';
-cyrillicTable['r'] = '&#1088;';
-cyrillicTable['s'] = '&#1089;';
-cyrillicTable['t'] = '&#1090;';
-cyrillicTable['v'] = '&#1074;';
-cyrillicTable['x'] = '&#1093;';
-cyrillicTable['z'] = '&#1079;';
-cyrillicTable['a'] = '&#1072;';
-cyrillicTable['e'] = '&#1077;';
-cyrillicTable['i'] = '&#1080;';
-cyrillicTable['o'] = '&#1086;';
-cyrillicTable['u'] = '&#1091;';
-cyrillicTable['y'] = '&#1098;';
+const cyrillicTable = {
+    'b': '&#1073;',
+    'c': '&#1096;',
+    'd': '&#1076;',
+    'f': '&#1092;',
+    'g': '&#1075;',
+    'j': '&#1078;',
+    'k': '&#1082;',
+    'l': '&#1083;',
+    'm': '&#1084;',
+    'n': '&#1085;',
+    'p': '&#1087;',
+    'r': '&#1088;',
+    's': '&#1089;',
+    't': '&#1090;',
+    'v': '&#1074;',
+    'x': '&#1093;',
+    'z': '&#1079;',
+    'a': '&#1072;',
+    'e': '&#1077;',
+    'i': '&#1080;',
+    'o': '&#1086;',
+    'u': '&#1091;',
+    'y': '&#1098;',
+};
 
 // Tengwar mode
 
 function transcribeToTengwar(text) {
     const result = [];
 
-    for (const i in text) {
-        result.push(wordToTengwar(addDotsToWord(text[i], text[i - 1])));
-    }
+    text.forEach((_, index) => {
+        result.push(wordToTengwar(addDotsToWord(text[index], text[index - 1])));
+    });
 
     return result;
 }
@@ -122,7 +123,7 @@ function wordToTengwar(word) {
     let tengwarWord = '';
     let canUseTehta = false;
 
-    for (let i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length; i += 1) {
         const letter = word.charAt(i);
 
         if (letter === '\'') {
@@ -140,7 +141,7 @@ function wordToTengwar(word) {
                 // And also prevent longer words.
                 if (word.length === i + 2 || word.charAt(i + 2) === ' ') {
                     tengwarWord += '&#57441;'; // double pusta
-                    i++;
+                    i += 1;
                     canUseTehta = false;
                     continue;
                 }
@@ -157,7 +158,7 @@ function wordToTengwar(word) {
                 // diphtong
                 tengwarWord += tengwaTable[letter];
                 tengwarWord += tehtaTable[word.charAt(i + 1)];
-                i++;
+                i += 1;
                 canUseTehta = false;
                 continue;
             } else if (!canUseTehta) {
@@ -185,48 +186,50 @@ function wordToTengwar(word) {
     return tengwarWord;
 }
 
-var tengwaTable = {};
-tengwaTable['b'] = '&#57349;';
-tengwaTable['c'] = '&#57354;';
-tengwaTable['d'] = '&#57348;';
-tengwaTable['f'] = '&#57353;';
-tengwaTable['g'] = '&#57351;';
-tengwaTable['j'] = '&#57358;';
-tengwaTable['k'] = '&#57347;';
-tengwaTable['l'] = '&#57378;';
-tengwaTable['m'] = '&#57361;';
-tengwaTable['n'] = '&#57360;';
-tengwaTable['p'] = '&#57345;';
-tengwaTable['r'] = '&#57376;';
-tengwaTable['s'] = '&#57380;';
-tengwaTable['t'] = '&#57344;';
-tengwaTable['v'] = '&#57357;';
-tengwaTable['x'] = '&#57355;';
-tengwaTable['z'] = '&#57382;';
+const tengwaTable = {
+    'b': '&#57349;',
+    'c': '&#57354;',
+    'd': '&#57348;',
+    'f': '&#57353;',
+    'g': '&#57351;',
+    'j': '&#57358;',
+    'k': '&#57347;',
+    'l': '&#57378;',
+    'm': '&#57361;',
+    'n': '&#57360;',
+    'p': '&#57345;',
+    'r': '&#57376;',
+    's': '&#57380;',
+    't': '&#57344;',
+    'v': '&#57357;',
+    'x': '&#57355;',
+    'z': '&#57382;',
 
-tengwaTable['a'] = '&#57394;';
-tengwaTable['e'] = '&#57386;';
-tengwaTable['i'] = '&#57390;';
-tengwaTable['o'] = '&#57366;';
-tengwaTable['u'] = '&#57365;';
-tengwaTable['y'] = '&#57388;';
+    'a': '&#57394;',
+    'e': '&#57386;',
+    'i': '&#57390;',
+    'o': '&#57366;',
+    'u': '&#57365;',
+    'y': '&#57388;',
+};
 
-var tehtaTable = {};
-tehtaTable['a'] = '&#57408;';
-tehtaTable['e'] = '&#57414;';
-tehtaTable['i'] = '&#57412;';
-tehtaTable['o'] = '&#57418;';
-tehtaTable['u'] = '&#57420;';
-tehtaTable['y'] = '&#57413;';
+const tehtaTable = {
+    'a': '&#57408;',
+    'e': '&#57414;',
+    'i': '&#57412;',
+    'o': '&#57418;',
+    'u': '&#57420;',
+    'y': '&#57413;',
+};
 
 // Hiragana mode
 
 function transcribeToHiragana(text) {
     const result = [];
 
-    for (const i in text) {
-        result.push(wordToHiragana(addDotsToWord(text[i], text[i - 1])));
-    }
+    text.forEach((_, index) => {
+        result.push(wordToHiragana(addDotsToWord(text[index], text[index - 1])));
+    });
 
     return result;
 }
@@ -258,15 +261,13 @@ function wordToHiragana(word) {
         .replace('a', 'ア').replace('i', 'イ').replace('u', 'ウ').replace('e', 'エ').replace('o', 'オ').replace('y', 'ァ')
         .replace('n', 'ン');
 
-    for (let i = 0; i < preHiraganaWord.length; i++) {
+    for (let i = 0; i < preHiraganaWord.length; i += 1) {
         const next = preHiraganaWord.charAt(i);
         const nextTwo = preHiraganaWord.substring(i, i + 2);
 
-        console.log(hiraganaTable['co']);
-
         if (hiraganaTable[nextTwo]) {
             hiraganaWord += hiraganaTable[nextTwo];
-            i++;
+            i += 1;
             continue;
         }
         if (hiraganaTable[next]) {
@@ -279,19 +280,20 @@ function wordToHiragana(word) {
     return hiraganaWord;
 }
 
-var hiraganaTable = {};
-hiraganaTable['c'] = '<span class="unvoiced-sound">ブ</span>';
-hiraganaTable['d'] = '<span class="unvoiced-sound">ド</span>';
-hiraganaTable['f'] = '<span class="unvoiced-sound">フ</span>';
-hiraganaTable['g'] = '<span class="unvoiced-sound">グ</span>';
-hiraganaTable['j'] = '<span class="unvoiced-sound">ジ</span>';
-hiraganaTable['k'] = '<span class="unvoiced-sound">ク</span>';
-hiraganaTable['l'] = '<span class="unvoiced-sound">ルﾟ</span>';
-hiraganaTable['m'] = '<span class="unvoiced-sound">ム</span>';
-hiraganaTable['p'] = '<span class="unvoiced-sound">プ</span>';
-hiraganaTable['r'] = '<span class="unvoiced-sound">ル</span>';
-hiraganaTable['s'] = '<span class="unvoiced-sound">ス</span>';
-hiraganaTable['t'] = '<span class="unvoiced-sound">ト</span>';
-hiraganaTable['v'] = '<span class="unvoiced-sound">ヴ</span>';
-hiraganaTable['x'] = '<span class="unvoiced-sound">ハ</span>';
-hiraganaTable['z'] = '<span class="unvoiced-sound">ズ</span>';
+const hiraganaTable = {
+    'c': '<span class="unvoiced-sound">ブ</span>',
+    'd': '<span class="unvoiced-sound">ド</span>',
+    'f': '<span class="unvoiced-sound">フ</span>',
+    'g': '<span class="unvoiced-sound">グ</span>',
+    'j': '<span class="unvoiced-sound">ジ</span>',
+    'k': '<span class="unvoiced-sound">ク</span>',
+    'l': '<span class="unvoiced-sound">ルﾟ</span>',
+    'm': '<span class="unvoiced-sound">ム</span>',
+    'p': '<span class="unvoiced-sound">プ</span>',
+    'r': '<span class="unvoiced-sound">ル</span>',
+    's': '<span class="unvoiced-sound">ス</span>',
+    't': '<span class="unvoiced-sound">ト</span>',
+    'v': '<span class="unvoiced-sound">ヴ</span>',
+    'x': '<span class="unvoiced-sound">ハ</span>',
+    'z': '<span class="unvoiced-sound">ズ</span>',
+};
