@@ -1,120 +1,44 @@
-# genturcta
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![](images/thumbnail.png)
+## Available Scripts
 
-genturcta は様々なロジバンパーサの解析結果を可視化して、見比べることが簡単にできます。
+In the project directory, you can run:
 
-## 試してみよう
+### `yarn start`
 
-パーサによって違う解析を出します。
-ときには、同じ文なのにエラーを出すパーサと出さないパーサがあることも。
-実際にどのように違うか以下の文で試してみよう
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-1. coirodo
-2. mi .iomlatu
-3. micitka loplise
-4. mipunacitka loplise
-5. micitka galoplise gilobadna
-6. broda .ebrodi
-7. la .tokios.
-8. dofeprami
-9. li 123
-10. ni'oni'o
-11. .i .i .i
-12. ni'o .ini'o
-13. la .arjen. eru'uri
-14. junla filisu'ijavu'u 20 noisesnidu
-15. junla filisu'ijavu'urenonoisesnidu
-16. doca'uviri'uvumo'iti'avabajra
-17. rodapoike'agerku zo'udadanlu
-18. konapencu lonenri belotanxe befilopelji
-19. midejni lorupnu nagi'adunda gi'abolebna vaulecukta vaula .djan.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-## 使用したパーサ
+### `yarn test`
 
-### camxes-beta-cbm-ckt.js
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-作者：
-[Ilmen](https://github.com/Ilmen-vodhr)
+### `yarn build`
 
-### camxes-beta-cbm.js
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-作者：
-[Ilmen](https://github.com/Ilmen-vodhr)
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-### camxes.js
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-作者：
-[Masato Hagiwara](https://github.com/mhagiwara)
+### `yarn eject`
 
-### camxes-beta.js
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-作者：
-[Ilmen](https://github.com/Ilmen-vodhr)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### camxes-exp.js
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-作者：
-[Ilmen](https://github.com/Ilmen-vodhr)
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### maftufa-1.15.js
+## Learn More
 
-作者：
-[la .guskant.](https://github.com/guskant)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### maltufa-0.9.js
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-### maltufa-1.15.js
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-### zantufa-0.9.js
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-### zantufa-0.61.js
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-### zantufa-1.3.js
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-## 使用したプログラム
-
-### [ilmentufa](https://github.com/lojban/ilmentufa)
-
-作者：
-[The Lojban Coder's Group on Github](https://github.com/lojban)
-
-貢献者：
-[Ilmen](https://github.com/Ilmen-vodhr)、
-[la .guskant.](https://github.com/guskant)、
-[durka](https://github.com/durka)、
-[gleki](https://github.com/lagleki)、
-[maltesl](https://github.com/maltesl)、
-[Vito Van](https://github.com/VitoVan)、
-[Lynn](https://github.com/lynn)
-
-### [ilmentufa/glosser](https://lojban.github.io/ilmentufa/glosser/glosser.htm)
-
-フロントデザイン： la .uilym
-
-### [gerna_cipra](https://github.com/guskant/gerna_cipra)
-
-作者：
-[la .guskant.](https://github.com/guskant)
-
-### [skaitomon-zei-jbovlaste](https://github.com/skytomo221/skaitomon-zei-jbovlaste)
-
-作者：
-[skytomo (la .skaitomon.)](https://github.com/skytomo221)
-
-ギスムのデータをこの辞書から取得しています。
+To learn React, check out the [React documentation](https://reactjs.org/).
