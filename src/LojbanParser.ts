@@ -120,9 +120,11 @@ class LojbanParser {
       let result = this.parser.parse(input) as OriginalParseTree;
       result = removeMorphology(result);
       result = removeSpaces(result);
+      this.error = null;
       this.result = numberSumti(simplifyTree(result)[0]);
     } catch (e) {
       this.error = e;
+      this.result = null;
     }
   }
 }
