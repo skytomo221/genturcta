@@ -40,6 +40,7 @@ const parsers: LojbanParser[] = [
 const App: React.FC = () => {
   const [lojbanText, setLojbanText] = React.useState('');
   const [parserResult, setParserResult] = React.useState<LojbanParser[]>([]);
+  const [update, setUpdate] = React.useState<boolean>(false);
 
   const lojbanTextHandleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -49,7 +50,8 @@ const App: React.FC = () => {
 
   const parse = () => {
     parsers.map((parser) => parser.parse(lojbanText));
-    setParserResult(parsers);
+    setParserResult(parserResult);
+    setUpdate(!update);
   };
 
   return (
