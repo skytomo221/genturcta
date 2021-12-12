@@ -1742,3 +1742,5 @@ const grosses = {
     'zvati': 'ある',
     'zviki': '',
 }
+
+export default grosses;

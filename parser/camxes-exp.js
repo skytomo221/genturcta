@@ -1,4 +1,4 @@
-var camxes_exp = (function() {
+var camxes = (function() {
   "use strict";
 
   /*

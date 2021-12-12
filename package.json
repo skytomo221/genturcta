@@ -8,7 +8,7 @@
     "start:dev": "webpack-dev-server --mode=development",
     "fix": "run-s fix:prettier fix:eslint",
     "fix:eslint": "eslint --fix --ext .ts,.tsx .",
-    "fix:prettier": "prettier --write . --ignore-path",
+    "fix:prettier": "prettier --write . --ignore-path .prettierignore",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/skytomo221/genturcta#readme",
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.1",
+    "@mui/material": "^5.2.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -46,6 +50,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "sass-loader": "^12.4.0",
+    "style-loader": "^3.3.1",
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.2",
     "webpack": "^5.65.0",

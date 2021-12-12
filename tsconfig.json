@@ -3,9 +3,13 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "module": "es6",
+    "moduleResolution": "node",
     "target": "es5",
     "allowJs": true,
-    "jsx": "react"
+    "jsx": "react",
+    "outDir": "dist"
   },
-  "files": ["src/index.tsx"]
+  "files": ["src/index.tsx"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "parser"]
 }
