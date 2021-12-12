@@ -116,17 +116,15 @@ const ConstructBoxesOutput = function ({
   }
 
   const result = parseResult;
-  console.log(result);
   if ('word' in result) {
     return (
-      <div>
-        &nbsp;
+      <div className="terminal">
         <b>{getVlasiskuLink(result.word)}</b>
-        &nbsp; &nbsp;
+        &nbsp;
         {result.type}
         {grosses[result.word as keyof typeof grosses] ? (
           <span className="translation">
-            &nbsp; &nbsp;
+            &nbsp;
             {grosses[result.word as keyof typeof grosses]}
           </span>
         ) : (
@@ -143,7 +141,7 @@ const ConstructBoxesOutput = function ({
           {result.sumtiPlace ? (
             `第${result.sumtiPlace}スムティ（sumti x${result.sumtiPlace}）`
           ) : result.type ? (
-            result.type
+            <div dangerouslySetInnerHTML={{ __html: result.type }} />
           ) : (
             <div className="box box-undefined" />
           )}

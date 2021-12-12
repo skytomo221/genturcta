@@ -162,21 +162,21 @@ const simplifyFunctions = {
 
     if (parse[1][0] === 'ZO_clause') {
       return {
-        type: 'LOhU句（LOhU clause）<br>= 一語引用（one-word quote）',
+        type: 'LOhU句（LOhU clause）<br />= 一語引用（one-word quote）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
 
     if (parse[1][0] === 'ZOI_clause') {
       return {
-        type: 'ZOI句（ZOI clause）<br>= 非ロジバン引用（non-Lojban quote）',
+        type: 'ZOI句（ZOI clause）<br />= 非ロジバン引用（non-Lojban quote）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
 
     if (parse[1][0] === 'LOhU_clause') {
       return {
-        type: 'LOhU句（LOhU clause）<br>= エラー引用（ungrammatical quote）',
+        type: 'LOhU句（LOhU clause）<br />= エラー引用（ungrammatical quote）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
@@ -190,7 +190,7 @@ const simplifyFunctions = {
 
     if (parse[1][0] === 'LU_clause') {
       return {
-        type: 'LU句（LU clause）<br>= 引用（grammatical quote）',
+        type: 'LU句（LU clause）<br />= 引用（grammatical quote）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
@@ -198,14 +198,14 @@ const simplifyFunctions = {
     if (parse[1][0] instanceof Array) {
       if (parse[1][0][0] === 'LAhE_clause') {
         return {
-          type: 'LAhE句（LAhE clause）<br>= 参照スムティ（reference sumti）',
+          type: 'LAhE句（LAhE clause）<br />= 参照スムティ（reference sumti）',
           children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
         };
       }
 
       if (parse[1][0][0] === 'NAhE_clause') {
         return {
-          type: 'NAhE句（NAhE clause）<br>= 否定スムティ（negated sumti）',
+          type: 'NAhE句（NAhE clause）<br />= 否定スムティ（negated sumti）',
           children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
         };
       }
@@ -213,7 +213,7 @@ const simplifyFunctions = {
 
     if (parse[1][0] === 'KOhA_clause') {
       return {
-        type: "KOhA句（KOhA clause）<br>= 代スムティ（sumka'i）",
+        type: "KOhA句（KOhA clause）<br />= 代スムティ（sumka'i）",
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
@@ -227,14 +227,14 @@ const simplifyFunctions = {
 
     if (parse[1][0] === 'LE_clause') {
       return {
-        type: 'LE句（LE clause）<br>= 描写スムティ（description）',
+        type: 'LE句（LE clause）<br />= 描写スムティ（description）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }
 
     if (parse[1][0] === 'li_clause') {
       return {
-        type: 'li句（li clause）<br>= 数（number）',
+        type: 'li句（li clause）<br />= 数（number）',
         children: simplifyArrayOfTrees(parse.slice(1) as OriginalParseTree[]),
       };
     }

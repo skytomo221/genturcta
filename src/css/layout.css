@@ -238,3 +238,9 @@ li.implicit {
     left: 50%;
     transform: translate(-50%, 0);
 }
+
+.terminal {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0.5em 0.25em;
+}
