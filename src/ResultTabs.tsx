@@ -41,6 +41,16 @@ function a11yProps(index: number) {
   };
 }
 
+const parserAndMark = (parser: LojbanParser) => {
+  let mark = '';
+  if (parser.error) {
+    mark = '❌';
+  } else if (parser.result) {
+    mark = '✅';
+  }
+  return `${parser.name}${mark}`;
+};
+
 interface Props {
   parsers: LojbanParser[];
 }
@@ -74,7 +84,7 @@ const ResultTabs = function ({ parsers }: Props) {
         >
           {parsers.map((parser, index) => (
             // eslint-disable-next-line react/jsx-props-no-spreading
-            <Tab label={parser.name} {...a11yProps(index)} />
+            <Tab label={parserAndMark(parser)} {...a11yProps(index)} />
           ))}
         </Tabs>
       </Box>
