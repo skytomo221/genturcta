@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import CheckIcon from '@mui/icons-material/Check';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
+import Box from '@mui/system/Box';
 import camxes_beta_cbm_ckt from '../parser/camxes-beta-cbm-ckt';
 import camxes_beta_cbm from '../parser/camxes-beta-cbm';
 import camxes_beta from '../parser/camxes-beta';
@@ -68,134 +69,34 @@ const App: React.FC = () => {
       </div>
       <div className="row">
         <div className="span12">
-          <form onSubmit={() => false}>
-            <fieldset>
-              <TextField
-                id="lojban-text-area"
-                label="ロジバンのテキスト"
-                multiline
-                value={lojbanText}
-                onChange={lojbanTextHandleChange}
-              />
-              <Button
-                variant="contained"
-                startIcon={<SearchIcon />}
-                className="btn btn-primary"
-                onClick={parse}
-              >
-                構文解析
-              </Button>
-              <Button
-                variant="contained"
-                startIcon={<SettingsIcon />}
-                href="glosser.htm#output-options-modal"
-                className="btn"
-                data-toggle="modal"
-              >
-                出力オプション
-              </Button>
-              <div
-                id="output-options-modal"
-                className="modal hide fade"
-                tabIndex={-1}
-                role="dialog"
-              >
-                <div className="modal-header">
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
-                    �
-                  </button>
-                  <h3>出力オプション</h3>
-                </div>
-                <div className="modal-body">
-                  <p>次のオプションは、解析出力の表示方法に影響を与えます。</p>
-                  <legend>文字体系</legend>
-                  出力する文字体系の選択
-                  <div className="btn-toolbar">
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="btn highlight-button active"
-                        id="latin-button"
-                      >
-                        ラテン文字
-                      </button>
-                      <button
-                        type="button"
-                        className="btn highlight-button"
-                        id="cyrillic-button"
-                      >
-                        キリル文字
-                      </button>
-                      <button
-                        type="button"
-                        className="btn highlight-button"
-                        id="tengwar-button"
-                      >
-                        テングワール
-                      </button>
-                      <button
-                        type="button"
-                        className="btn highlight-button"
-                        id="hiragana-button"
-                      >
-                        ひらがな
-                      </button>
-                    </div>
-                  </div>
-                  <legend>ピリオド</legend>
-                  単語にピリオドを追加するときのルール
-                  <b>（この機能はまだ未実装です。）</b>
-                  <div className="btn-toolbar">
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="btn dots-button"
-                        id="nodots-button"
-                      >
-                        なし
-                      </button>
-                      <button
-                        type="button"
-                        className="btn dots-button active"
-                        id="traditionaldots-button"
-                      >
-                        標準
-                      </button>
-                      <button
-                        type="button"
-                        className="btn dots-button"
-                        id="dotside-button"
-                      >
-                        両端に必ずピリオドをつける
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div className="modal-footer">
-                  <Button
-                    variant="contained"
-                    startIcon={<CheckIcon />}
-                    href="glosser.htm#"
-                    data-dismiss="modal"
-                    className="btn btn-primary"
-                  >
-                    保存して閉じる
-                  </Button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
+          <Box
+            sx={{
+              m: 1, p: 1, display: 'flex', alignItems: 'center',
+            }}
+          >
+            <TextField
+              id="lojban-text-area"
+              label="解析するテキスト"
+              multiline
+              value={lojbanText}
+              onChange={lojbanTextHandleChange}
+              sx={{ width: '100%' }}
+            />
+            <Button
+              variant="contained"
+              startIcon={<SearchIcon />}
+              className="btn btn-primary"
+              onClick={parse}
+              sx={{ m: 1, whiteSpace: 'nowrap' }}
+            >
+              構文解析する
+            </Button>
+          </Box>
         </div>
       </div>
       <div className="row">
         <div id="result-row" className="span12">
           <legend>
-            解析結果
             <small>
               <span id="time-label" />
             </small>
